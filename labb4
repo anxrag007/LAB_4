@@ -1,0 +1,96 @@
+# Define a class to represent a flight
+class Flight:
+    # Initialize the flight attributes
+    def __init__(self, id, origin, destination, price):
+        self.id = id
+        self.origin = origin
+        self.destination = destination
+        self.price = price
+
+    # Define a method to display the flight details
+    def display(self):
+        print(f"Flight ID: {self.id}")
+        print(f"From: {self.origin}")
+        print(f"To: {self.destination}")
+        print(f"Price: {self.price}")
+
+# Create a list of flights using the given data
+flights = [
+    Flight("AI161E90", "BLR", "BOM", 5600),
+    Flight("BR161F91", "BOM", "BBI", 6750),
+    Flight("AI161F99", "BBI", "BLR", 8210),
+    Flight("VS171E20", "JLR", "BBI", 5500),
+    Flight("AS171G30", "HYD", "JLR", 4400),
+    Flight("AI131F49", "HYD", "BOM", 3499)
+]
+
+# Define a function to search and print the result data
+def search_flights():
+    # Display the search options
+    print("Choose the search parameter:")
+    print("1. Flights for a particular city")
+    print("2. Flights from a city")
+    print("3. Flights between two given cities")
+
+    # Get the user input
+    choice = int(input("Enter your choice (1, 2, or 3): "))
+    
+    # Validate the user input
+    if choice not in [1, 2, 3]:
+        print("Invalid choice. Please try again.")
+        return
+
+    # Perform the search based on the user choice
+    if choice == 1:
+        # Get the city name
+        city = input("Enter the city name: ")
+        # Initialize an empty list to store the matching flights
+        results = []
+        # Loop through the flights list and check if the city matches either origin or destination
+        for flight in flights:
+            if flight.origin == city or flight.destination == city:
+                # Add the matching flight to the results list
+                results.append(flight)
+        # Display the number of results found
+        print(f"Found {len(results)} flights for {city}.")
+    
+    elif choice == 2:
+        # Get the origin city name
+        origin = input("Enter the origin city name: ")
+        # Initialize an empty list to store the matching flights
+        results = []
+        # Loop through the flights list and check if the origin matches
+        for flight in flights:
+            if flight.origin == origin:
+                # Add the matching flight to the results list
+                results.append(flight)
+        # Display the number of results found
+        print(f"Found {len(results)} flights from {origin}.")
+    
+    else:
+        # Get the origin and destination city names
+        origin = input("Enter the origin city name: ")
+        destination = input("Enter the destination city name: ")
+        # Initialize an empty list to store the matching flights
+        results = []
+        # Loop through the flights list and check if the origin and destination match
+        for flight in flights:
+            if flight.origin == origin and flight.destination == destination:
+                # Add the matching flight to the results list
+                results.append(flight)
+        # Display the number of results found
+        print(f"Found {len(results)} flights between {origin} and {destination}.")
+
+    # Display the result data if any
+    if results:
+        print("Here are the details of the flights:")
+        # Loop through the results list and display each flight details using the display method
+        for result in results:
+            result.display()
+            print()
+    
+    else:
+        print("No flights found matching your criteria.")
+
+# Call the search_flights function to start the program
+search_flights()
